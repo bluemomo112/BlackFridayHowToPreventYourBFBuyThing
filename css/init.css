@@ -1,0 +1,35 @@
+body
+{
+background: url(../image/bg.png) no-repeat;
+background-size: cover;
+}
+
+#mask{
+	background: #000;
+	opacity:0.75;
+	filter:alpha(opacity=75);
+	height: 1000px;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top:0;
+	z-index: 1000;
+}
+
+#popup{
+	position: fixed;
+	left: 30%;
+	top: 30%;
+	background-color: rgb(188,100,100);
+	width: 500px;
+	height: 300px;
+	z-index: 1000;
+
+}
+
+/*.text{
+	background-color: rgb(188,100,100);
+	width: 500px;
+	height: 300px;
+	z-index: 1001;
+}*/

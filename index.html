@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>双11，别剁手</title>
+	<link rel="stylesheet" type="text/css" href="css\dialogZ.css">
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+	<script type="text/javascript" src="./js/dialogZ.js"></script>
+	<style type="text/css">
+
+
+	</style>
+	<script >
+		
+		/*创作者：编程猫-内容策划组*/
+
+		var text_list=["第1句话","第2句话","第3句话","第4句话","第5句话","第6句话","第7句话",8]
+
+		$(function () {
+			$('#dialogZ1').dialogZ({showButton:true,});
+			// console.log($('#popText').text())
+			$('#popText').text(text_list[0])
+			$('#dialogZ1').dialogZ('show');
+			
+			var i=0
+
+			//为按钮绑定事件
+			$(".dialog__cancel").on('click',function seqShow(){
+
+				i++;
+				$('#popText').text(text_list[i]);
+				$('#dialogZ1').dialogZ('close');
+				setTimeout("$('#dialogZ1').dialogZ('show')", 100);
+
+
+				//判定是否到了最后一句话
+
+				if (i==6) {
+					// console.log("out");
+					$(".dialog__cancel").off("click",seqShow);
+					window.location.href="https://www.codemao.cn/"
+				}
+						
+				// $('#popText').delay(1000).text("2").delay(1000).text("3");
+			})
+			// if (i==2) {$('#dialogZ1').dialogZ('close');}
+			// 
+		})
+
+
+	</script>
+</head>
+<body style="background-image:url('image/bg.png');background-size: cover">
+
+	<div id="dialogZ1" class="dialog">
+		<div class="dialog__overlay"></div>
+		<div class="dialog__content" >
+			<h2 id='popText'>这是一个测试的弹出框</h2>
+		</div>	
+	</div>
+
+</body>
+
+
+</html>
