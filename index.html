@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>双11，别剁手</title>
+	<title>双十一防女朋友剁手手册</title>
 	<link rel="stylesheet" type="text/css" href="css\dialogZ.css">
 	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
 	<script type="text/javascript" src="./js/dialogZ.js"></script>
@@ -12,33 +12,59 @@
 	</style>
 	<script >
 		
-		/*创作者：编程猫-内容策划组*/
+		/*创作者：蓝琳玲*/
 
-		var text_list=["第1句话","第2句话","第3句话","第4句话","第5句话","第6句话","第7句话",8]
+		var text_list=["第1句话","第2句话","第3句话","第4句话","第5句话","第6句话","第7句话","第8句话","第9句话","第10句话","第11句话","第12句话","第13句话","第14句话"]
 
 		$(function () {
+			//弹出弹窗
 			$('#dialogZ1').dialogZ({showButton:true,});
-			// console.log($('#popText').text())
-			$('#popText').text(text_list[0])
+			$('#popText').text(text_list[0]);
 			$('#dialogZ1').dialogZ('show');
-			
-			var i=0
+
+			var i=0;
+			//获取可视区域的宽度
+			var wWidth= window.innerWidth|| document.documentElement.clientWidth|| document.body.clientWidth;
+			var wHeight=window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
+
+			//绑定鼠标进入事件
+			$(".dialog__content").on("mouseenter",function popMove(){
+				//出发后
+				i++;
+				$('#popText').text(text_list[i]);
+				var x=Math.floor(Math.random()*(wWidth-$(".dialog__content").width()-50));
+				var y=Math.floor(Math.random()*(wHeight-$(".dialog__content").height()-50));
+				console.log(x,y)
+
+				$(".dialog__content").css({"position":"fixed","left":x,"top":y});
+
+				if (i>=text_list.length/2) {
+					console.log(i);
+					$(".dialog__content").off("mouseenter",popMove);
+					// window.location.href="https://www.codemao.cn/"
+				}
+				
+			})
+	
 
 			//为按钮绑定事件
 			$(".dialog__cancel").on('click',function seqShow(){
 
+				// $(".dialog__cancel").off("mouseenter",moove());
+				$('#dialogZ1').dialogZ('close');
 				i++;
 				$('#popText').text(text_list[i]);
-				$('#dialogZ1').dialogZ('close');
 				setTimeout("$('#dialogZ1').dialogZ('show')", 100);
 
 
 				//判定是否到了最后一句话
 
-				if (i==6) {
-					// console.log("out");
+				if (i>=text_list.length-1) {
+					console.log("out");
+					$('#popText').text("离开的话语");
 					$(".dialog__cancel").off("click",seqShow);
-					window.location.href="https://www.codemao.cn/"
+					setTimeout("window.location.href='https://www.codemao.cn/'",200);
+					
 				}
 						
 				// $('#popText').delay(1000).text("2").delay(1000).text("3");
@@ -54,8 +80,8 @@
 
 	<div id="dialogZ1" class="dialog">
 		<div class="dialog__overlay"></div>
-		<div class="dialog__content" >
-			<h2 id='popText'>这是一个测试的弹出框</h2>
+		<div class="dialog__content" style="padding: 20px; width: 25%" >
+			<h2 id='popText' style="padding: 0px 0px 15px;font-size: 30px">这是一个测试的弹出框</h2>
 		</div>	
 	</div>
 
