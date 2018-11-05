@@ -1,67 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<link rel="stylesheet" href="./dialogZ.css">
-</head>
+	<meta charset="utf-8">
+	<title>双十一如何巧妙提醒你的男♂朋友剁手手册</title>
+	<link rel="stylesheet" type="text/css" href="css\dialogZ.css">
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+	<script type="text/javascript" src="./js/dialogZ.js"></script>
+	<style type="text/css">
 
-<body>
-	<!-- <input type="button" id="dialogZ-open-btn" value="open" /> -->
-	<input type="button" id="dialogZ-open-btn1" value="open" />
+
+	</style>
+	<script >
+		
+		/*创作者：蓝琳玲*/
+
+		var text_list=["对双十一...","摩拳擦掌？","跃跃欲试？","蠢蠢欲动?",'心痒难耐？','前仆后继？','死而后已？',"不屈不挠的","想买下那辆价值连城的车？","在下手之前","请仔细想一想...","女朋友的","圣诞礼物","元旦礼物","新年礼物","生日礼物","情人节礼物","女王节礼物","七夕节礼物","买了吗？","如果没买...","那恭喜你","你竟然有女朋友！！！","为她买礼物吧。","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物","买礼物"]
+
+		$(function () {
+			//弹出弹窗
+			$('#dialogZ1').dialogZ({showButton:true,});
+			$('#popText').text(text_list[0]);
+			$('#dialogZ1').dialogZ('show');
+
+			var i=0;
+			//获取可视区域的宽度
+			var wWidth= window.innerWidth|| document.documentElement.clientWidth|| document.body.clientWidth;
+			var wHeight=window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
+
+			//绑定鼠标进入事件
+			$(".dialog__content").on("mouseenter",function popMove(){
+				//出发后
+				i++;
+				$('#popText').text(text_list[i]);
+				var x=Math.floor(Math.random()*(wWidth-$(".dialog__content").width()-50));
+				var y=Math.floor(Math.random()*(wHeight-$(".dialog__content").height()-50));
+				console.log(x,y)
+
+				$(".dialog__content").css({"position":"fixed","left":x,"top":y});
+
+				if (i>=22) {
+					console.log(i);
+					$(".dialog__content").off("mouseenter",popMove);
+					// window.location.href="https://www.codemao.cn/"
+				}
+				
+			})
 	
-	<!-- <div id="dialogZ" class="dialog"></div> -->
+
+			//为按钮绑定事件
+			$(".dialog__cancel").on('click',function seqShow(){
+
+				// $(".dialog__cancel").off("mouseenter",moove());
+				$('#dialogZ1').dialogZ('close');
+				i++;
+				$('#popText').text(text_list[i]);
+				setTimeout("$('#dialogZ1').dialogZ('show')", 100);
+
+
+				//判定是否到了最后一句话
+
+				if (i>=text_list.length-1) {
+					console.log("out");
+					$('#popText').text("关注一个有趣的Programmer吧！");
+					$(".dialog__cancel").off("click",seqShow);
+					setTimeout("window.location.href='https://bluemomo112.github.io/'",200);
+					
+				}
+						
+				// $('#popText').delay(1000).text("2").delay(1000).text("3");
+			})
+			// if (i==2) {$('#dialogZ1').dialogZ('close');}
+			// 
+		})
+
+
+	</script>
+</head>
+<body style="background-image:url('image/bg.png');background-size: cover">
 
 	<div id="dialogZ1" class="dialog">
 		<div class="dialog__overlay"></div>
-		<div class="dialog__content">
-			<h2>这是一个测试的弹出框</h2>
+		<div class="dialog__content" style="padding: 20px; width: 25%" >
+			<h2 id='popText' style="padding: 0px 25px 15px;font-size: 20px;margin-top: 10px">这是一个测试的弹出框</h2>
 		</div>	
 	</div>
+
 </body>
-<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
-<script type="text/javascript" src="./dialogZ.js"></script>
-<script>
-// 	function newOpen(){
 
-// 	// $('#dialogZ').dialogZ({
-// 	// 	content:'<h2>这是一个测试的弹出框</h2>',
-// 	// });
-// 	$('#dialogZ1').dialogZ({
-// 		showButton:true,
-// 		// onSureClick:function(){
-// 		// 	console.log('111');
-// 		// }
-// 	});
-// 	// $('#dialogZ-open-btn').on('click', function () {
-// 	// 	$('#dialogZ').dialogZ('show');
-// 	// });
-// 	// $('#dialogZ-close-btn').on('click', function () {
-// 	// 	$('#dialogZ').dialogZ('close');
-// 	// });
-// 	$('#dialogZ-open-btn1').on('click', function () {
-// 		$('#dialogZ1').dialogZ('show');
-// 	});
-// 	$('#dialogZ-close-btn1').on('click', function () {
-// 		$('#dialogZ1').dialogZ('close');
-// 	});
-// }
-	
-
-
-
-window.onload=function(){
-	$('#dialogZ1').dialogZ({
-	showButton:true,});
-	$('#dialogZ-open-btn1').on('click', function () {
-		$('#dialogZ1').dialogZ('show');
-});
-	$('#dialogZ-close-btn1').on('click', function () {
-		$('#dialogZ1').dialogZ('close');
-});
-}
-
-</script>
 
 </html>
